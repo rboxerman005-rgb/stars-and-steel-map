@@ -9,21 +9,40 @@
 
     body {
       background: #1a1410;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
       color: #e8d9b5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     h1 {
-      margin: 20px 0 12px;
-      font-size: 1.6rem;
+      text-align: center;
+      padding: 16px 0 10px;
+      font-size: 1.5rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #c9a84c;
       text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── MAP AREA ── */
+    .map-area {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
     }
 
     .map-wrapper {
@@ -48,14 +67,22 @@
     }
 
     .pin svg {
-      width: 28px;
-      height: 36px;
+      width: 24px;
+      height: 32px;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
       transition: transform 0.15s ease;
     }
 
-    .pin:hover svg {
-      transform: scale(1.2);
+    .pin:hover svg, .pin.highlighted svg {
+      transform: scale(1.35);
+    }
+
+    .pin.highlighted svg path {
+      fill: #ff6b35;
+    }
+
+    .pin.highlighted svg circle {
+      fill: #fff;
     }
 
     /* ── TOOLTIP ── */
@@ -72,33 +99,199 @@
       min-width: 180px;
       max-width: 220px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.7);
-      z-index: 20;
+      z-index: 30;
       white-space: normal;
       pointer-events: none;
     }
 
-    .pin:hover .tooltip {
+    .pin:hover .tooltip,
+    .pin.highlighted .tooltip {
       display: block;
     }
 
     .tooltip h2 {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #c9a84c;
       margin-bottom: 4px;
       letter-spacing: 0.05em;
     }
 
     .tooltip p {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #e8d9b5;
       line-height: 1.4;
     }
 
-    footer {
-      margin: 14px 0 20px;
+    /* ── SIDEBAR (DESKTOP) ── */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: #211608;
+      border-left: 1px solid #c9a84c44;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: width 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      width: 36px;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      color: #c9a84c;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 10px;
+      text-align: right;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .sidebar.collapsed .sidebar-toggle {
+      text-align: center;
+    }
+
+    .sidebar-content {
+      overflow-y: auto;
+      flex: 1;
+      padding: 0 12px 20px;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .sidebar.collapsed .sidebar-content {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sidebar h2 {
       font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin: 16px 0 8px;
+      border-bottom: 1px solid #c9a84c33;
+      padding-bottom: 4px;
+    }
+
+    .legend-entry {
+      display: block;
+      padding: 5px 4px;
+      font-size: 0.82rem;
+      color: #e8d9b5;
+      text-decoration: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .legend-entry:hover {
+      background: #c9a84c22;
+      color: #c9a84c;
+    }
+
+    .legend-entry.active {
+      color: #ff6b35;
+      background: #ff6b3511;
+    }
+
+    /* ── MOBILE DRAWER ── */
+    .drawer-toggle {
+      display: none;
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2b1f0e;
+      border: 1px solid #c9a84c;
+      color: #c9a84c;
+      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .drawer {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #211608;
+      border-top: 1px solid #c9a84c44;
+      z-index: 200;
+      max-height: 55vh;
+      overflow-y: auto;
+      padding: 12px 16px 24px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .drawer.open {
+      transform: translateY(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .drawer-header span {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      color: #c9a84c;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .drawer h2 {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin: 14px 0 6px;
+      border-bottom: 1px solid #c9a84c33;
+      padding-bottom: 3px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .drawer-toggle { display: block; }
+      .drawer { display: block; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0 14px;
+      font-size: 0.72rem;
       color: #7a6a4a;
       letter-spacing: 0.06em;
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -106,43 +299,145 @@
 
 <h1>Wallachtia &amp; Klanansk</h1>
 
-<div class="map-wrapper" id="mapWrapper">
+<div class="layout">
 
-  <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" />
+  <!-- MAP -->
+  <div class="map-area">
+    <div class="map-wrapper" id="mapWrapper">
 
-  <!--
-  ═══════════════════════════════════════════════════════
-  HOW TO ADD A PIN:
+      <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" />
 
-  1. Copy the entire <a class="pin">...</a> block below.
-  2. Change the id (e.g. pin-froenberg).
-  3. Adjust left/top percentages to position it on the map.
-     - left: 0% = far left, 100% = far right
-     - top:  0% = top,      100% = bottom
-  4. Change the href to the Obsidian Publish URL.
-  5. Update the <h2> name and <p> description inside the tooltip.
-  ═══════════════════════════════════════════════════════
-  -->
+      <!--
+      ═══════════════════════════════════════════════════════
+      HOW TO ADD A PIN:
 
-  <!-- ── WALLCARUS ── -->
-  <a class="pin" id="pin-wallcarus"
-     style="left: 30.5%; top: 72%;"
-     href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wallcarus/Wallcarus"
-     target="_blank">
-    <svg viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg">
-      <path d="M14 0C8.477 0 4 4.477 4 10c0 7.5 10 26 10 26S24 17.5 24 10C24 4.477 19.523 0 14 0z"
-            fill="#c9a84c" stroke="#2b1f0e" stroke-width="1.5"/>
-      <circle cx="14" cy="10" r="4" fill="#2b1f0e"/>
-    </svg>
-    <div class="tooltip">
-      <h2>Wallcarus</h2>
-      <p>The capital of the Wallachtian Empire and its largest city.</p>
+      1. Copy an entire <a class="pin"> block.
+      2. Give it a unique id (e.g. pin-froenberg).
+      3. Set left/top % to position it on the map.
+      4. Set href to the Obsidian Publish URL.
+      5. Update the tooltip <h2> name and <p> description.
+
+      HOW TO ADD A LEGEND ENTRY:
+
+      1. Copy a <button class="legend-entry"> line.
+      2. Set data-pin to match the pin id (e.g. pin-froenberg).
+      3. Update the label text.
+      4. Place it under the correct <h2> category.
+         Add a new <h2> category if needed.
+      ═══════════════════════════════════════════════════════
+      -->
+
+      <!-- ── WALLCARUS ── -->
+      <a class="pin" id="pin-wallcarus"
+         style="left: 30.5%; top: 72%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wallcarus/Wallcarus"
+         target="_blank">
+        <svg viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 0C8.477 0 4 4.477 4 10c0 7.5 10 26 10 26S24 17.5 24 10C24 4.477 19.523 0 14 0z"
+                fill="#c9a84c" stroke="#2b1f0e" stroke-width="1.5"/>
+          <circle cx="14" cy="10" r="4" fill="#2b1f0e"/>
+        </svg>
+        <div class="tooltip">
+          <h2>Wallcarus</h2>
+          <p>The capital of the Wallachtian Empire and its largest city.</p>
+        </div>
+      </a>
+
     </div>
-  </a>
+  </div>
+
+  <!-- DESKTOP SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">◀ Legend</button>
+    <div class="sidebar-content">
+
+      <h2>Cities &amp; Settlements</h2>
+      <button class="legend-entry" data-pin="pin-wallcarus" onclick="highlightPin('pin-wallcarus')">Wallcarus</button>
+      <!-- Add more entries here -->
+
+      <!-- Example of another category:
+      <h2>Points of Interest</h2>
+      <button class="legend-entry" data-pin="pin-beecham" onclick="highlightPin('pin-beecham')">Beecham Distillery</button>
+      -->
+
+    </div>
+  </div>
+
+</div>
+
+<!-- MOBILE DRAWER TOGGLE BUTTON -->
+<button class="drawer-toggle" onclick="toggleDrawer()">☰ Legend</button>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>Legend</span>
+    <button class="drawer-close" onclick="toggleDrawer()">✕</button>
+  </div>
+
+  <h2>Cities &amp; Settlements</h2>
+  <button class="legend-entry" data-pin="pin-wallcarus" onclick="highlightPin('pin-wallcarus'); toggleDrawer();">Wallcarus</button>
+  <!-- Mirror your sidebar entries here -->
 
 </div>
 
 <footer>Wallachtia &amp; Klanansk — Stars &amp; Steel</footer>
+
+<script>
+  // ── SIDEBAR TOGGLE ──
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('sidebarToggle');
+    sidebar.classList.toggle('collapsed');
+    btn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀ Legend';
+  }
+
+  // ── MOBILE DRAWER ──
+  function toggleDrawer() {
+    document.getElementById('drawer').classList.toggle('open');
+  }
+
+  // ── HIGHLIGHT PIN FROM LEGEND ──
+  let activePin = null;
+
+  function highlightPin(pinId) {
+    // Remove previous highlight
+    if (activePin) {
+      const prev = document.getElementById(activePin);
+      if (prev) prev.classList.remove('highlighted');
+      document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
+    }
+
+    // If clicking the same pin again, just clear it
+    if (activePin === pinId) {
+      activePin = null;
+      return;
+    }
+
+    // Apply new highlight
+    const pin = document.getElementById(pinId);
+    if (pin) {
+      pin.classList.add('highlighted');
+      // Scroll map area so pin is visible
+      pin.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }
+
+    // Highlight the legend entry
+    document.querySelectorAll(`[data-pin="${pinId}"]`).forEach(e => e.classList.add('active'));
+
+    activePin = pinId;
+  }
+
+  // Clear highlight when clicking map background
+  document.getElementById('mapWrapper').addEventListener('click', function(e) {
+    if (!e.target.closest('.pin') && activePin) {
+      const prev = document.getElementById(activePin);
+      if (prev) prev.classList.remove('highlighted');
+      document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
+      activePin = null;
+    }
+  });
+</script>
 
 </body>
 </html>
