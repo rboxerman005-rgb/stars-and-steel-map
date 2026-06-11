@@ -296,6 +296,16 @@
       100% { width: 1.7vw; height: 1.7vw; }
     }
 
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.8); }
+      70%  { box-shadow: 0 0 0 5vw rgba(255, 0, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
+      }
+    .pin.highlighted span[style*="width: 3vw"] {
+      animation: pulse-ring 1s ease-out infinite;
+      border-radius: 50%;
+    }
+
     .pin.highlighted span {
       animation: pulse .75s ease-in-out infinite;
       position: relative;
