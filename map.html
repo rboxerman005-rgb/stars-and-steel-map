@@ -92,7 +92,10 @@
     /* ── TOOLTIP ── */
     .tooltip {
       display: none;
-      position: fixed;
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
       background: #2b1f0e;
       border: 1px solid #c9a84c;
       border-radius: 4px;
@@ -624,18 +627,13 @@
     tooltip.style.top = top + 'px';
   }
 
-  // Attach mouseover positioning to all pins
+  // Position tooltip on mouseenter so it never clips off screen
   document.querySelectorAll('.pin').forEach(pin => {
     const tooltip = pin.querySelector('.tooltip');
     if (!tooltip) return;
     pin.addEventListener('mouseenter', () => {
-      tooltip.style.display = 'block';
-      positionTooltip(pin, tooltip);
-    });
-    pin.addEventListener('mouseleave', () => {
-      if (!pin.classList.contains('highlighted')) {
-        tooltip.style.display = 'none';
-      }
+      // Let CSS make it visible first, then reposition
+      requestAnimationFrame(() => positionTooltip(pin, tooltip));
     });
   });
 
@@ -645,11 +643,7 @@
   function highlightPin(pinId) {
     if (activePin) {
       const prev = document.getElementById(activePin);
-      if (prev) {
-        prev.classList.remove('highlighted');
-        const prevTip = prev.querySelector('.tooltip');
-        if (prevTip) prevTip.style.display = 'none';
-      }
+      if (prev) prev.classList.remove('highlighted');
       document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
     }
 
@@ -663,11 +657,8 @@
       pin.classList.add('highlighted');
       const tooltip = pin.querySelector('.tooltip');
       if (tooltip) {
-        tooltip.style.display = 'block';
-        // Wait a frame so offsetHeight is available
         requestAnimationFrame(() => positionTooltip(pin, tooltip));
       }
-      pin.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
     }
 
     document.querySelectorAll(`[data-pin="${pinId}"]`).forEach(e => e.classList.add('active'));
@@ -678,24 +669,9 @@
   document.getElementById('mapWrapper').addEventListener('click', function(e) {
     if (!e.target.closest('.pin') && activePin) {
       const prev = document.getElementById(activePin);
-      if (prev) {
-        prev.classList.remove('highlighted');
-        const prevTip = prev.querySelector('.tooltip');
-        if (prevTip) prevTip.style.display = 'none';
-      }
+      if (prev) prev.classList.remove('highlighted');
       document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
       activePin = null;
-    }
-  });
-
-  // Reposition active tooltip on scroll/resize
-  window.addEventListener('resize', () => {
-    if (activePin) {
-      const pin = document.getElementById(activePin);
-      if (pin) {
-        const tooltip = pin.querySelector('.tooltip');
-        if (tooltip) positionTooltip(pin, tooltip);
-      }
     }
   });
 </script>
