@@ -100,11 +100,17 @@
       border: 1px solid #c9a84c;
       border-radius: 4px;
       padding: 8px 12px;
-      width: 220px;
+      min-width: 180px;
+      max-width: 220px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.7);
       z-index: 9999;
       white-space: normal;
       pointer-events: none;
+    }
+
+    .pin:hover .tooltip,
+    .pin.highlighted .tooltip {
+      display: block;
     }
 
     .tooltip h2 {
@@ -293,10 +299,10 @@
 
 <div class="layout">
 
-  <div class="map-area">
+  <div class="map-area" id="mapArea">
     <div class="map-wrapper" id="mapWrapper">
 
-      <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" id="mapImg" />
+      <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" />
 
       <!--
       ═══════════════════════════════════════════════════════
@@ -602,41 +608,6 @@
     document.getElementById('drawer').classList.toggle('open');
   }
 
-  // ── TOOLTIP POSITIONING ──
-  // Tooltips use position:fixed and are positioned by JS to avoid edge clipping
-  function positionTooltip(pin, tooltip) {
-    const pinRect = pin.getBoundingClientRect();
-    const tipWidth = 220;
-    const tipHeight = tooltip.offsetHeight || 80;
-    const margin = 8;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    // Default: above and centered on pin
-    let left = pinRect.left + pinRect.width / 2 - tipWidth / 2;
-    let top = pinRect.top - tipHeight - margin;
-
-    // Clamp horizontal
-    if (left < margin) left = margin;
-    if (left + tipWidth > vw - margin) left = vw - tipWidth - margin;
-
-    // If too close to top, show below instead
-    if (top < margin) top = pinRect.bottom + margin;
-
-    tooltip.style.left = left + 'px';
-    tooltip.style.top = top + 'px';
-  }
-
-  // Position tooltip on mouseenter so it never clips off screen
-  document.querySelectorAll('.pin').forEach(pin => {
-    const tooltip = pin.querySelector('.tooltip');
-    if (!tooltip) return;
-    pin.addEventListener('mouseenter', () => {
-      // Let CSS make it visible first, then reposition
-      requestAnimationFrame(() => positionTooltip(pin, tooltip));
-    });
-  });
-
   // ── HIGHLIGHT PIN FROM LEGEND ──
   let activePin = null;
 
@@ -655,10 +626,16 @@
     const pin = document.getElementById(pinId);
     if (pin) {
       pin.classList.add('highlighted');
-      const tooltip = pin.querySelector('.tooltip');
-      if (tooltip) {
-        requestAnimationFrame(() => positionTooltip(pin, tooltip));
-      }
+      // Scroll the map area (not the whole page) to center the pin
+      const mapArea = document.getElementById('mapArea');
+      const mapWrapper = document.getElementById('mapWrapper');
+      const pinLeft = (parseFloat(pin.style.left) / 100) * mapWrapper.offsetWidth;
+      const pinTop = (parseFloat(pin.style.top) / 100) * mapWrapper.offsetHeight;
+      mapArea.scrollTo({
+        left: pinLeft - mapArea.offsetWidth / 2,
+        top: pinTop - mapArea.offsetHeight / 2,
+        behavior: 'smooth'
+      });
     }
 
     document.querySelectorAll(`[data-pin="${pinId}"]`).forEach(e => e.classList.add('active'));
