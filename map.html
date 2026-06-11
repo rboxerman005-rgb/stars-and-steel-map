@@ -28,7 +28,6 @@
       flex-shrink: 0;
     }
 
-    /* ── MAIN LAYOUT ── */
     .layout {
       display: flex;
       flex: 1;
@@ -36,7 +35,6 @@
       position: relative;
     }
 
-    /* ── MAP AREA ── */
     .map-area {
       flex: 1;
       display: flex;
@@ -83,41 +81,27 @@
       z-index: 1000;
     }
 
-    .pin.highlighted svg path {
-      fill: #ff6b35;
-    }
+    .pin.highlighted svg path { fill: #ff6b35; }
+    .pin.highlighted svg circle { fill: #fff; }
 
-    .pin.highlighted svg circle {
-      fill: #fff;
+    .pin span {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── TOOLTIP ── */
     .tooltip {
       display: none;
-      position: absolute;
-      bottom: 110%;
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed;
       background: #2b1f0e;
       border: 1px solid #c9a84c;
       border-radius: 4px;
       padding: 8px 12px;
-      min-width: unset;
-      max-width: 220px;
+      width: 220px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.7);
       z-index: 9999;
       white-space: normal;
       pointer-events: none;
-    }
-
-    .pin:hover .tooltip,
-    .pin.highlighted .tooltip {
-      display: block;
-    }
-
-    .pin span {
-      position: relative;
-      z-index: 1;
     }
 
     .tooltip h2 {
@@ -145,9 +129,7 @@
       transition: width 0.3s ease;
     }
 
-    .sidebar.collapsed {
-      width: 36px;
-    }
+    .sidebar.collapsed { width: 36px; }
 
     .sidebar-toggle {
       background: none;
@@ -161,9 +143,7 @@
       white-space: nowrap;
     }
 
-    .sidebar.collapsed .sidebar-toggle {
-      text-align: center;
-    }
+    .sidebar.collapsed .sidebar-toggle { text-align: center; }
 
     .sidebar-content {
       overflow-y: auto;
@@ -227,7 +207,7 @@
       background: #2b1f0e;
       border: 1px solid #c9a84c;
       color: #c9a84c;
-      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      font-family: 'IM Fell English SC', serif;
       font-size: 0.85rem;
       letter-spacing: 0.08em;
       padding: 8px 20px;
@@ -254,9 +234,7 @@
       transition: transform 0.3s ease;
     }
 
-    .drawer.open {
-      transform: translateY(0);
-    }
+    .drawer.open { transform: translateY(0); }
 
     .drawer-header {
       display: flex;
@@ -290,7 +268,6 @@
       padding-bottom: 3px;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       .sidebar { display: none; }
       .drawer-toggle { display: block; }
@@ -305,7 +282,6 @@
       letter-spacing: 0.06em;
       flex-shrink: 0;
     }
-    
   </style>
 </head>
 <body>
@@ -314,173 +290,106 @@
 
 <div class="layout">
 
-  <!-- MAP -->
   <div class="map-area">
     <div class="map-wrapper" id="mapWrapper">
 
-      <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" />
-
+      <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" id="mapImg" />
 
       <!--
       ═══════════════════════════════════════════════════════
                 CITIES AND SETTLEMENTS
       ═══════════════════════════════════════════════════════
       -->
-      
+
       <!-- ── WALLCARUS ── -->
-      <a class="pin" id="pin-wallcarus"
-         style="left: 29.7%; top: 74.7%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wallcarus/Wallcarus"
-         target="_blank">
+      <a class="pin" id="pin-wallcarus" style="left: 29.7%; top: 74.7%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wallcarus/Wallcarus" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Wallcarus</h2>
-          <p>The capital of the Wallachtian Empire and its largest city.</p>
-        </div>
+        <div class="tooltip"><h2>Wallcarus</h2><p>The capital of the Wallachtian Empire and its largest city.</p></div>
       </a>
-     
+
       <!-- ── FROENBERG ── -->
-      <a class="pin" id="pin-froenberg"
-         style="left: 15.7%; top: 55.5%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Froenberg/Froenberg"
-         target="_blank">
+      <a class="pin" id="pin-froenberg" style="left: 15.7%; top: 55.5%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Froenberg/Froenberg" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Froenberg</h2>
-          <p>The industrious "City of Smokestacks" at the northern edge of Wallachtia.</p>
-        </div>
+        <div class="tooltip"><h2>Froenberg</h2><p>The industrious "City of Smokestacks" at the northern edge of Wallachtia.</p></div>
       </a>
 
       <!-- ── ACHAROS ── -->
-      <a class="pin" id="pin-acharos"
-         style="left: 54%; top: 72.9%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Acharos/Acharos"
-         target="_blank">
+      <a class="pin" id="pin-acharos" style="left: 54%; top: 72.9%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Acharos/Acharos" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Acharos</h2>
-          <p>"The City of Milk and Honey" sits on the Vitrean Lake and is a popular destination for nobles and wealthy merchants.</p>
-        </div>
+        <div class="tooltip"><h2>Acharos</h2><p>"The City of Milk and Honey" sits on the Vitrean Lake and is a popular destination for nobles and wealthy merchants.</p></div>
       </a>
 
-       <!-- ── STILLWATER ── -->
-      <a class="pin" id="pin-stillwater"
-         style="left: 42.4%; top: 87.5%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Stillwater/Stillwater"
-         target="_blank">
+      <!-- ── STILLWATER ── -->
+      <a class="pin" id="pin-stillwater" style="left: 42.4%; top: 87.5%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Stillwater/Stillwater" target="_blank">
         <span style="font-size: 1vw; line-height: 1; color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">▪️ Stillwater</span>
-        <div class="tooltip">
-          <h2>Stillwater</h2>
-          <p>A small fishing hamlet nestled where the freshwater runoff of the Vitrean Lake runs into the sea.</p>
-        </div>
+        <div class="tooltip"><h2>Stillwater</h2><p>A small fishing hamlet nestled where the freshwater runoff of the Vitrean Lake runs into the sea.</p></div>
       </a>
 
-       <!-- ── VOLDT ── -->
-      <a class="pin" id="pin-voldt"
-         style="left: 42.4%; top: 77.1%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Voldt/Voldt"
-         target="_blank">
+      <!-- ── VOLDT ── -->
+      <a class="pin" id="pin-voldt" style="left: 42.4%; top: 77.1%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Voldt/Voldt" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Voldt</h2>
-          <p>A small city known primarily for breeding the finest warhorses in Wallachtia.</p>
-        </div>
+        <div class="tooltip"><h2>Voldt</h2><p>A small city known primarily for breeding the finest warhorses in Wallachtia.</p></div>
       </a>
 
       <!-- ── WRONSK ── -->
-      <a class="pin" id="pin-wronsk"
-         style="left: 35.3%; top: 62%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wronsk/Wronsk"
-         target="_blank">
+      <a class="pin" id="pin-wronsk" style="left: 35.3%; top: 62%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Wronsk/Wronsk" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Wronsk</h2>
-          <p>A small city that has served as the staging grounds for most of the Wallachtian military during the war.</p>
-        </div>
+        <div class="tooltip"><h2>Wronsk</h2><p>A small city that has served as the staging grounds for most of the Wallachtian military during the war.</p></div>
       </a>
 
       <!-- ── HOLTON ── -->
-      <a class="pin" id="pin-holton"
-         style="left: 12.2%; top: 72.1%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Holton/Holton"
-         target="_blank">
+      <a class="pin" id="pin-holton" style="left: 12.2%; top: 72.1%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Holton/Holton" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Holton</h2>
-          <p>A Wallachtian city known for producing fish and hosting hunting parties to the Royal Woods to the east.</p>
-        </div>
+        <div class="tooltip"><h2>Holton</h2><p>A Wallachtian city known for producing fish and hosting hunting parties to the Royal Woods to the east.</p></div>
       </a>
 
       <!-- ── STONERIVER ── -->
-      <a class="pin" id="pin-stoneriver"
-         style="left: 38.2%; top: 37.4%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Stoneriver/Stoneriver"
-         target="_blank">
+      <a class="pin" id="pin-stoneriver" style="left: 38.2%; top: 37.4%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Stoneriver/Stoneriver" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Stoneriver</h2>
-          <p>A town once known for hosting travellers across the subcontinent, it has borne the brunt of the conflict and is a shadow of its former self.</p>
-        </div>
+        <div class="tooltip"><h2>Stoneriver</h2><p>A town once known for hosting travellers across the subcontinent, it has borne the brunt of the conflict and is a shadow of its former self.</p></div>
       </a>
 
       <!-- ── TAR-MOK ── -->
-      <a class="pin" id="pin-tarmok"
-         style="left: 48.2%; top: 50.0%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Tar-Mok/Tar-Mok"
-         target="_blank">
+      <a class="pin" id="pin-tarmok" style="left: 48.2%; top: 50.0%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Tar-Mok/Tar-Mok" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Tar-Mok</h2>
-          <p>A small Klanash city on the northern coast of the Vitrean Lake, the city links much trade between Klanansk and Wallachtia.</p>
-        </div>
+        <div class="tooltip"><h2>Tar-Mok</h2><p>A small Klanash city on the northern coast of the Vitrean Lake, the city links much trade between Klanansk and Wallachtia.</p></div>
       </a>
 
       <!-- ── DORMEK ── -->
-      <a class="pin" id="pin-dormek"
-         style="left: 46.4%; top: 17.8%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Dormek/Dormek"
-         target="_blank">
+      <a class="pin" id="pin-dormek" style="left: 46.4%; top: 17.8%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Dormek/Dormek" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Dörmek</h2>
-          <p>"The City of Hammers," the Dwarven stronghold of Klanansk, sits on an active volcano and produces some of the finest smithed wares in the known world.</p>
-        </div>
+        <div class="tooltip"><h2>Dörmek</h2><p>"The City of Hammers," the Dwarven stronghold of Klanansk, sits on an active volcano and produces some of the finest smithed wares in the known world.</p></div>
       </a>
 
-      <!-- ── SVLEN ── -->
-      <a class="pin" id="pin-sveln"
-         style="left: 65.5%; top: 28.3%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Sveln/Sveln"
-         target="_blank">
+      <!-- ── SVELN ── -->
+      <a class="pin" id="pin-sveln" style="left: 65.5%; top: 28.3%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Sveln/Sveln" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Sveln</h2>
-          <p>A Klanash settlement known for producing most of the mithril from the country.</p>
-        </div>
+        <div class="tooltip"><h2>Sveln</h2><p>A Klanash settlement known for producing most of the mithril from the country.</p></div>
       </a>
 
       <!-- ── UMIRYUSHI ── -->
-      <a class="pin" id="pin-umiryushi"
-         style="left: 91.0%; top: 27.3%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Umiryushi/Umiryushi"
-         target="_blank">
+      <a class="pin" id="pin-umiryushi" style="left: 91.0%; top: 27.3%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Umiryushi/Umiryushi" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Umiryushi</h2>
-          <p>This city in the mist is home to the fearsome dragonborn navy of Klanansk.</p>
-        </div>
+        <div class="tooltip"><h2>Umiryushi</h2><p>This city in the mist is home to the fearsome dragonborn navy of Klanansk.</p></div>
       </a>
 
       <!-- ── TAR-GULUK ── -->
-      <a class="pin" id="pin-targuluk"
-         style="left: 61.2%; top: 43.4%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Tar-Guluk/Tar-Guluk"
-         target="_blank">
+      <a class="pin" id="pin-targuluk" style="left: 61.2%; top: 43.4%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/3+-+Settlements/Tar-Guluk/Tar-Guluk" target="_blank">
         <span style="display: inline-block; width: 45px; height: 45px;"></span>
-        <div class="tooltip">
-          <h2>Tar-Guluk</h2>
-          <p>The Wandering City of Tar-Guluk is the capital of Klanansk, and a sacred place for all Klanash citizens.</p>
-        </div>
+        <div class="tooltip"><h2>Tar-Guluk</h2><p>The Wandering City of Tar-Guluk is the capital of Klanansk, and a sacred place for all Klanash citizens.</p></div>
       </a>
 
       <!--
@@ -490,176 +399,103 @@
       -->
 
       <!-- ── EMERALD SEA ── -->
-      <a class="pin" id="pin-emeraldsea"
-         style="left: 80.4%; top: 62.9%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/The+Emerald+Sea"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1; color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌲</span>
-        <div class="tooltip">
-          <h2>The Emerald Sea</h2>
-          <p>A huge, dense forest known as The Emerald Sea. Most residents of the subcontinent are leery of the forest, as rumors claim that it is a cursed place home to malevolent fey spirits.</p>
-        </div>
+      <a class="pin" id="pin-emeraldsea" style="left: 80.4%; top: 62.9%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/The+Emerald+Sea" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌲</span>
+        <div class="tooltip"><h2>The Emerald Sea</h2><p>A huge, dense forest known as The Emerald Sea. Most residents of the subcontinent are leery of the forest, as rumors claim that it is a cursed place home to malevolent fey spirits.</p></div>
       </a>
 
       <!-- ── THUNDERING PLAINS ── -->
-      <a class="pin" id="pin-thunderingplains"
-         style="left: 66.4%; top: 51.0%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Thundering+Plains"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌾</span>
-        <div class="tooltip">
-          <h2>Thundering Plains</h2>
-          <p>A vast grassland in the heart of Klanansk, named for the thunderous herds of massive tortoises that migrate across it.</p>
-        </div>
+      <a class="pin" id="pin-thunderingplains" style="left: 66.4%; top: 51.0%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Thundering+Plains" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌾</span>
+        <div class="tooltip"><h2>Thundering Plains</h2><p>A vast grassland in the heart of Klanansk, named for the thunderous herds of massive tortoises that migrate across it.</p></div>
       </a>
 
       <!-- ── VITREAN LAKE ── -->
-      <a class="pin" id="pin-vitreanlake"
-         style="left: 54.5%; top: 67.0%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Vitrean+Lake"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>Vitrean Lake</h2>
-          <p>The largest body of water on the subcontinent, a popular retreat for wealthy Wallachtians — though most avoid its eastern shores.</p>
-        </div>
+      <a class="pin" id="pin-vitreanlake" style="left: 54.5%; top: 67.0%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Vitrean+Lake" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>Vitrean Lake</h2><p>The largest body of water on the subcontinent, a popular retreat for wealthy Wallachtians — though most avoid its eastern shores.</p></div>
       </a>
 
       <!-- ── MITHRIL LAKE ── -->
-      <a class="pin" id="pin-mithrillake"
-         style="left: 65.4%; top: 24.8%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Mithril+Lake"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>Mithril Lake</h2>
-          <p>A deep lake in Klanansk named for the rich mithril deposits on its lakebed, home to the city of Sveln.</p>
-        </div>
+      <a class="pin" id="pin-mithrillake" style="left: 65.4%; top: 24.8%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Mithril+Lake" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>Mithril Lake</h2><p>A deep lake in Klanansk named for the rich mithril deposits on its lakebed, home to the city of Sveln.</p></div>
       </a>
 
       <!-- ── DRAGON'S EYE ── -->
-      <a class="pin" id="pin-dragonseye"
-         style="left: 86.0%; top: 20.7%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Dragon%27s+Eye"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>Dragon's Eye</h2>
-          <p>A massive whirlpool in the Dragon's Claw that perpetually churns the waters near Umiryushi, recently growing more turbulent than usual.</p>
-        </div>
+      <a class="pin" id="pin-dragonseye" style="left: 86.0%; top: 20.7%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Dragon%27s+Eye" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>Dragon's Eye</h2><p>A massive whirlpool in the Dragon's Claw that perpetually churns the waters near Umiryushi, recently growing more turbulent than usual.</p></div>
       </a>
 
       <!-- ── GOLDEN EXPANSE ── -->
-      <a class="pin" id="pin-goldenexpanse"
-         style="left: 38.1%; top: 69.1%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Golden+Expanse"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌾</span>
-        <div class="tooltip">
-          <h2>Golden Expanse</h2>
-          <p>A vast stretch of extraordinarily fertile farmland that forms the agricultural backbone of the Wallachtian Empire.</p>
-        </div>
+      <a class="pin" id="pin-goldenexpanse" style="left: 38.1%; top: 69.1%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Golden+Expanse" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌾</span>
+        <div class="tooltip"><h2>Golden Expanse</h2><p>A vast stretch of extraordinarily fertile farmland that forms the agricultural backbone of the Wallachtian Empire.</p></div>
       </a>
 
       <!-- ── ROYAL WOODS ── -->
-      <a class="pin" id="pin-royalwoods"
-         style="left: 21.4%; top: 62.9%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Royal+Woods"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌲</span>
-        <div class="tooltip">
-          <h2>Royal Woods</h2>
-          <p>A lush forest reserve in Wallachtia reserved for noble hunts — common folk who enter are punishable by death.</p>
-        </div>
+      <a class="pin" id="pin-royalwoods" style="left: 21.4%; top: 62.9%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Royal+Woods" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌲</span>
+        <div class="tooltip"><h2>Royal Woods</h2><p>A lush forest reserve in Wallachtia reserved for noble hunts — common folk who enter are punishable by death.</p></div>
       </a>
 
       <!-- ── BAY OF ACARIUS ── -->
-      <a class="pin" id="pin-bayofacarius"
-         style="left: 26.1%; top: 82.4%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Bay+of+Acarius"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>Bay of Acarius</h2>
-          <p>A calm, sheltered bay where the Sigin River meets the sea, named after Acarius, the founder of Wallachtia.</p>
-        </div>
+      <a class="pin" id="pin-bayofacarius" style="left: 26.1%; top: 82.4%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Bay+of+Acarius" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>Bay of Acarius</h2><p>A calm, sheltered bay where the Sigin River meets the sea, named after Acarius, the founder of Wallachtia.</p></div>
       </a>
 
       <!-- ── SHATTERED ISLES ── -->
-      <a class="pin" id="pin-shatteredisles"
-         style="left: 8.4%; top: 49.0%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Shattered+Isles"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>Shattered Isles</h2>
-          <p>A treacherous chain of rocky islands controlled by Klanansk, frustrating Wallachtian attempts to navigate the western seaboard.</p>
-        </div>
+      <a class="pin" id="pin-shatteredisles" style="left: 8.4%; top: 49.0%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Shattered+Isles" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>Shattered Isles</h2><p>A treacherous chain of rocky islands controlled by Klanansk, frustrating Wallachtian attempts to navigate the western seaboard.</p></div>
       </a>
 
       <!-- ── GREY HILLS ── -->
-      <a class="pin" id="pin-greyhills"
-         style="left: 20.7%; top: 37.7%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Grey+Hills"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">⛰️</span>
-        <div class="tooltip">
-          <h2>Grey Hills</h2>
-          <p>Barren, ash-covered hills stretching to the western sea, said to be scarred by an ancient battle of devastating power.</p>
-        </div>
+      <a class="pin" id="pin-greyhills" style="left: 20.7%; top: 37.7%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Grey+Hills" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">⛰️</span>
+        <div class="tooltip"><h2>Grey Hills</h2><p>Barren, ash-covered hills stretching to the western sea, said to be scarred by an ancient battle of devastating power.</p></div>
       </a>
 
       <!-- ── BUNDUSH MOUNTAINS ── -->
-      <a class="pin" id="pin-bundushmountains"
-         style="left: 27.1%; top: 20.0%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Bundush+Mountains"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">⛰️</span>
-        <div class="tooltip">
-          <h2>Bundush Mountains</h2>
-          <p>A towering mountain range forming the northwestern corner of the subcontinent, home to the dwarven city of Dormek.</p>
-        </div>
+      <a class="pin" id="pin-bundushmountains" style="left: 27.1%; top: 20.0%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Bundush+Mountains" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">⛰️</span>
+        <div class="tooltip"><h2>Bundush Mountains</h2><p>A towering mountain range forming the northwestern corner of the subcontinent, home to the dwarven city of Dormek.</p></div>
       </a>
 
       <!-- ── GIANT'S FINGER ── -->
-      <a class="pin" id="pin-giantsfinger"
-         style="left: 14.7%; top: 6.5%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Giant%27s+Finger"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">⛰️</span>
-        <div class="tooltip">
-          <h2>Giant's Finger</h2>
-          <p>The highest and snowiest peaks of the Bundush Mountains, where legend says giants once roamed in ancient times.</p>
-        </div>
+      <a class="pin" id="pin-giantsfinger" style="left: 14.7%; top: 6.5%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Giant%27s+Finger" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">⛰️</span>
+        <div class="tooltip"><h2>Giant's Finger</h2><p>The highest and snowiest peaks of the Bundush Mountains, where legend says giants once roamed in ancient times.</p></div>
       </a>
 
       <!-- ── DRAGON'S CLAW ── -->
-      <a class="pin" id="pin-dragonsclaw"
-         style="left: 86.2%; top: 16.3%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Dragon%27s+Claw"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">⛰️</span>
-        <div class="tooltip">
-          <h2>Dragon's Claw</h2>
-          <p>A chain of rocky islands leading to the dragonborn city of Umiryushi, navigable only by a single treacherous clifftop road.</p>
-        </div>
+      <a class="pin" id="pin-dragonsclaw" style="left: 86.2%; top: 16.3%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/Dragon%27s+Claw" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">⛰️</span>
+        <div class="tooltip"><h2>Dragon's Claw</h2><p>A chain of rocky islands leading to the dragonborn city of Umiryushi, navigable only by a single treacherous clifftop road.</p></div>
       </a>
 
       <!-- ── THE FORK ── -->
-      <a class="pin" id="pin-thefork"
-         style="left: 38.8%; top: 42%;"
-         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/The+Fork"
-         target="_blank">
-        <span style="font-size: 1vw; line-height: 1;color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌊</span>
-        <div class="tooltip">
-          <h2>The Fork</h2>
-          <p>The point where the Sigin River splits to form the Lasiva River, where the city of Stoneriver sits on its western banks.</p>
-        </div>
+      <a class="pin" id="pin-thefork" style="left: 38.8%; top: 42%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/The+Fork" target="_blank">
+        <span style="font-size: 1vw; line-height: 1;">🌊</span>
+        <div class="tooltip"><h2>The Fork</h2><p>The point where the Sigin River splits to form the Lasiva River, where the city of Stoneriver sits on its western banks.</p></div>
       </a>
 
-      
-
-      
     </div>
   </div>
 
@@ -668,21 +504,21 @@
     <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">◀ Legend</button>
     <div class="sidebar-content">
 
-      <h2>Cities &amp; Settlements</h2>      
+      <h2>Cities &amp; Settlements</h2>
       <button class="legend-entry" data-pin="pin-acharos" onclick="highlightPin('pin-acharos')">Acharos</button>
       <button class="legend-entry" data-pin="pin-dormek" onclick="highlightPin('pin-dormek')">Dormek</button>
       <button class="legend-entry" data-pin="pin-froenberg" onclick="highlightPin('pin-froenberg')">Froenberg</button>
-      <button class="legend-entry" data-pin="pin-holton" onclick="highlightPin('pin-holton')">Holton</button>      
+      <button class="legend-entry" data-pin="pin-holton" onclick="highlightPin('pin-holton')">Holton</button>
       <button class="legend-entry" data-pin="pin-stillwater" onclick="highlightPin('pin-stillwater')">Stillwater</button>
       <button class="legend-entry" data-pin="pin-stoneriver" onclick="highlightPin('pin-stoneriver')">Stoneriver</button>
       <button class="legend-entry" data-pin="pin-sveln" onclick="highlightPin('pin-sveln')">Sveln</button>
       <button class="legend-entry" data-pin="pin-targuluk" onclick="highlightPin('pin-targuluk')">Tar-Guluk</button>
-      <button class="legend-entry" data-pin="pin-tarmok" onclick="highlightPin('pin-tarmok')">Tar-Mok</button> 
-      <button class="legend-entry" data-pin="pin-umiryushi" onclick="highlightPin('pin-umiryushi')">Umiryushi</button>      
+      <button class="legend-entry" data-pin="pin-tarmok" onclick="highlightPin('pin-tarmok')">Tar-Mok</button>
+      <button class="legend-entry" data-pin="pin-umiryushi" onclick="highlightPin('pin-umiryushi')">Umiryushi</button>
       <button class="legend-entry" data-pin="pin-voldt" onclick="highlightPin('pin-voldt')">Voldt</button>
       <button class="legend-entry" data-pin="pin-wallcarus" onclick="highlightPin('pin-wallcarus')">Wallcarus</button>
       <button class="legend-entry" data-pin="pin-wronsk" onclick="highlightPin('pin-wronsk')">Wronsk</button>
-           
+
       <h2>Regions and Natural Features</h2>
       <button class="legend-entry" data-pin="pin-bayofacarius" onclick="highlightPin('pin-bayofacarius')">Bay of Acarius</button>
       <button class="legend-entry" data-pin="pin-bundushmountains" onclick="highlightPin('pin-bundushmountains')">Bundush Mountains</button>
@@ -698,7 +534,6 @@
       <button class="legend-entry" data-pin="pin-thefork" onclick="highlightPin('pin-thefork')">The Fork</button>
       <button class="legend-entry" data-pin="pin-thunderingplains" onclick="highlightPin('pin-thunderingplains')">Thundering Plains</button>
       <button class="legend-entry" data-pin="pin-vitreanlake" onclick="highlightPin('pin-vitreanlake')">Vitrean Lake</button>
-      
 
     </div>
   </div>
@@ -746,16 +581,6 @@
   <button class="legend-entry" data-pin="pin-thunderingplains" onclick="highlightPin('pin-thunderingplains'); toggleDrawer();">Thundering Plains</button>
   <button class="legend-entry" data-pin="pin-vitreanlake" onclick="highlightPin('pin-vitreanlake'); toggleDrawer();">Vitrean Lake</button>
 
-
-
-
-
-
-
-
-  
-  
-
 </div>
 
 <footer>Wallachtia &amp; Klanansk — Stars &amp; Steel</footer>
@@ -774,34 +599,78 @@
     document.getElementById('drawer').classList.toggle('open');
   }
 
+  // ── TOOLTIP POSITIONING ──
+  // Tooltips use position:fixed and are positioned by JS to avoid edge clipping
+  function positionTooltip(pin, tooltip) {
+    const pinRect = pin.getBoundingClientRect();
+    const tipWidth = 220;
+    const tipHeight = tooltip.offsetHeight || 80;
+    const margin = 8;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Default: above and centered on pin
+    let left = pinRect.left + pinRect.width / 2 - tipWidth / 2;
+    let top = pinRect.top - tipHeight - margin;
+
+    // Clamp horizontal
+    if (left < margin) left = margin;
+    if (left + tipWidth > vw - margin) left = vw - tipWidth - margin;
+
+    // If too close to top, show below instead
+    if (top < margin) top = pinRect.bottom + margin;
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+  }
+
+  // Attach mouseover positioning to all pins
+  document.querySelectorAll('.pin').forEach(pin => {
+    const tooltip = pin.querySelector('.tooltip');
+    if (!tooltip) return;
+    pin.addEventListener('mouseenter', () => {
+      tooltip.style.display = 'block';
+      positionTooltip(pin, tooltip);
+    });
+    pin.addEventListener('mouseleave', () => {
+      if (!pin.classList.contains('highlighted')) {
+        tooltip.style.display = 'none';
+      }
+    });
+  });
+
   // ── HIGHLIGHT PIN FROM LEGEND ──
   let activePin = null;
 
   function highlightPin(pinId) {
-    // Remove previous highlight
     if (activePin) {
       const prev = document.getElementById(activePin);
-      if (prev) prev.classList.remove('highlighted');
+      if (prev) {
+        prev.classList.remove('highlighted');
+        const prevTip = prev.querySelector('.tooltip');
+        if (prevTip) prevTip.style.display = 'none';
+      }
       document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
     }
 
-    // If clicking the same pin again, just clear it
     if (activePin === pinId) {
       activePin = null;
       return;
     }
 
-    // Apply new highlight
     const pin = document.getElementById(pinId);
     if (pin) {
       pin.classList.add('highlighted');
-      // Scroll map area so pin is visible
+      const tooltip = pin.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'block';
+        // Wait a frame so offsetHeight is available
+        requestAnimationFrame(() => positionTooltip(pin, tooltip));
+      }
       pin.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
     }
 
-    // Highlight the legend entry
     document.querySelectorAll(`[data-pin="${pinId}"]`).forEach(e => e.classList.add('active'));
-
     activePin = pinId;
   }
 
@@ -809,9 +678,24 @@
   document.getElementById('mapWrapper').addEventListener('click', function(e) {
     if (!e.target.closest('.pin') && activePin) {
       const prev = document.getElementById(activePin);
-      if (prev) prev.classList.remove('highlighted');
+      if (prev) {
+        prev.classList.remove('highlighted');
+        const prevTip = prev.querySelector('.tooltip');
+        if (prevTip) prevTip.style.display = 'none';
+      }
       document.querySelectorAll('.legend-entry').forEach(e => e.classList.remove('active'));
       activePin = null;
+    }
+  });
+
+  // Reposition active tooltip on scroll/resize
+  window.addEventListener('resize', () => {
+    if (activePin) {
+      const pin = document.getElementById(activePin);
+      if (pin) {
+        const tooltip = pin.querySelector('.tooltip');
+        if (tooltip) positionTooltip(pin, tooltip);
+      }
     }
   });
 </script>
