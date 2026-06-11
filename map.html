@@ -305,6 +305,17 @@
       letter-spacing: 0.06em;
       flex-shrink: 0;
     }
+
+    @media (max-width: 700px) {
+  .tooltip {
+    left: 5px !important;
+    right: 5px !important;
+    transform: none !important;
+    min-width: unset;
+    max-width: unset;
+  }
+}
+    
   </style>
 </head>
 <body>
@@ -697,7 +708,7 @@
       <button class="legend-entry" data-pin="pin-thefork" onclick="highlightPin('pin-thefork')">The Fork</button>
       <button class="legend-entry" data-pin="pin-thunderingplains" onclick="highlightPin('pin-thunderingplains')">Thundering Plains</button>
       <button class="legend-entry" data-pin="pin-vitreanlake" onclick="highlightPin('pin-vitreanlake')">Vitrean Lake</button>
-      -->
+      
 
     </div>
   </div>
