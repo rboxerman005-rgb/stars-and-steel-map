@@ -279,11 +279,11 @@
 
     @keyframes pulse {
       0%   { filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff); }
-      50%  { filter: drop-shadow(0 0 8px #ff6b35) drop-shadow(0 0 16px #ff6b35); }
+      50%  { filter: drop-shadow(0 0 30px #ff6b35) drop-shadow(0 0 60px #ff6b35); }
       100% { filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff); }
-      } 
-    .pin.highlighted span {
-      animation: pulse 1s ease-in-out infinite;
+        } 
+      .pin.highlighted span {
+      animation: pulse .5s ease-in-out infinite;
     }
 
     @media (max-width: 700px) {
