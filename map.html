@@ -86,7 +86,6 @@
 
     .pin span {
       position: relative;
-      z-index: 1;
     }
 
     /* ── TOOLTIP ── */
@@ -285,7 +284,8 @@
       }
       .pin.highlighted span {
       animation: pulse .75s ease-in-out infinite;
-      z-index: 0;
+      position: relative;
+      z-index: -1;
     }
 
     @media (max-width: 700px) {
@@ -293,7 +293,7 @@
      .drawer-toggle { display: block; }
      .drawer { display: block; }
      .tooltip { display: none !important; }
-     .pin img { width: 7px !important; height: 7px !important; }
+     .pin img { width: 6px !important; height: 6px !important; }
     }
 
 
