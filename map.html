@@ -65,6 +65,7 @@
       cursor: pointer;
       z-index: 10;
       text-decoration: none;
+      overflow: visible;
     }
 
     .pin svg {
@@ -76,6 +77,10 @@
 
     .pin:hover svg, .pin.highlighted svg {
       transform: scale(1.35);
+    }
+
+    .pin:hover {
+      z-index: 1000;
     }
 
     .pin.highlighted svg path {
