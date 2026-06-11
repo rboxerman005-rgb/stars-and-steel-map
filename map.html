@@ -309,25 +309,6 @@
 
       <img src="Wallachtia__Klanansk.jpg" alt="Map of Wallachtia and Klanansk" />
 
-      <!--
-      ═══════════════════════════════════════════════════════
-      HOW TO ADD A PIN:
-
-      1. Copy an entire <a class="pin"> block.
-      2. Give it a unique id (e.g. pin-froenberg).
-      3. Set left/top % to position it on the map.
-      4. Set href to the Obsidian Publish URL.
-      5. Update the tooltip <h2> name and <p> description.
-
-      HOW TO ADD A LEGEND ENTRY:
-
-      1. Copy a <button class="legend-entry"> line.
-      2. Set data-pin to match the pin id (e.g. pin-froenberg).
-      3. Update the label text.
-      4. Place it under the correct <h2> category.
-         Add a new <h2> category if needed.
-      ═══════════════════════════════════════════════════════
-      -->
 
       <!--
       ═══════════════════════════════════════════════════════
@@ -491,30 +472,24 @@
         </div>
       </a>
 
+      <!--
+      ═══════════════════════════════════════════════════════
+                NATURAL FEATURES
+      ═══════════════════════════════════════════════════════
+      -->
 
+      <!-- ── EMERALD SEA ── -->
+      <a class="pin" id="pin-emeraldsea"
+         style="left: 80.4%; top: 63.9%;"
+         href="https://publish.obsidian.md/starsandsteelwiki/5+-+Regions+%26+Natural+Features/The+Emerald+Sea"
+         target="_blank">
+        <span style="font-size: 1vw; line-height: 1; color: #000000; text-shadow: -0.03em -0.03em 2px #fff, 0.03em -0.03em 2px #fff, -0.03em 0.03em 2px #fff, 0.03em 0.03em 2px #fff;">🌲 The Emerald Sea</span>
+        <div class="tooltip">
+          <h2>The Emerald Sea</h2>
+          <p>A huge, dense forest known as The Emerald Sea. Most residents of the subcontinent are leery of the forest, as rumors claim that it is a cursed place home to malevolent fey spirits.</p>
+        </div>
+      </a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
       
     </div>
   </div>
@@ -538,7 +513,7 @@
       <button class="legend-entry" data-pin="pin-voldt" onclick="highlightPin('pin-voldt')">Voldt</button>
       <button class="legend-entry" data-pin="pin-wallcarus" onclick="highlightPin('pin-wallcarus')">Wallcarus</button>
       <button class="legend-entry" data-pin="pin-wronsk" onclick="highlightPin('pin-wronsk')">Wronsk</button>
-      <!-- Add more entries here -->
+      
 
       <!-- Example of another category:
       <h2>Points of Interest</h2>
