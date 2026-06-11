@@ -287,6 +287,12 @@
       100% { font-size: 1vw; }
     }
 
+    @keyframes pulse-img {
+      0%   { width: 26px; height: 26px; }
+      50%  { width: 80px; height: 80px; }
+      100% { width: 26px; height: 26px; }
+    }
+
     .pin.highlighted span {
       animation: pulse .75s ease-in-out infinite;
       position: relative;
@@ -304,6 +310,11 @@
      .drawer { display: block; }
      .tooltip { display: none !important; }
      .pin img { width: 6px !important; height: 6px !important; }
+        @keyframes pulse-img {
+          0%   { width: 6px; height: 6px; }
+          50%  { width: 20px; height: 20px; }
+          100% { width: 6px; height: 6px; }
+      }       
     }
 
 
